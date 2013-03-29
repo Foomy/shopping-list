@@ -3,7 +3,10 @@
 <head>
 	<?php echo $this->headMeta() . PHP_EOL; ?>
 	<?php echo $this->headTitle() . PHP_EOL; ?>
-	<?php echo $this->headLink() . PHP_EOL; ?>
+	<?php
+		$this->loadSkin($this->skin);
+		echo $this->headLink() . PHP_EOL;
+	?>
 	<?php echo $this->headScript() . PHP_EOL; ?>
 </head>
 <body>

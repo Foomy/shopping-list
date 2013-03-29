@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.red {
+	color: red;
+}
+
+.green {
+	color: green;
+}
+
+.hide {
+	display: none;
+}
+
+#wrapper {
+	/*width:480px;*/
+	padding: 10px;
+}
+
+.titleBar {
+	border: solid 1px #70dfff;
+	background: #def5ff;
+	/*width:473px;*/
+	height: 30px;
+	padding: 0px 4px;
+	margin: 0 0 2px 0;
+}
+
+.titleBar .title {
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.toggleForm {
+	cursor: pointer;
+	float: right
+}
+
+.addField {
+	width: 800px;
+	height: 175px;
+}
+
+.ctrl {
+	list-style-type: none;
+	/*width: 480px;*/
+}
+
+.ctrl li {
+	padding: 5px 2px;
+	float: right;
+}
+
+.ctrl li button {
+	cursor: pointer;
+}
+
+.shoppingList {
+	/*width: 800px;*/
+	clear: both;
+}
+
+.shoppingList .delete {
+	cursor: pointer;
+}

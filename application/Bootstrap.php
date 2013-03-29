@@ -27,6 +27,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$appOptions = (object)$this->getOption('app');
 		$view->appOptions = $appOptions;
 
+		$view->skin = 'default';
+		$view->skin = 'mobile';
+
 		$view->doctype('HTML5');
 		$view->headTitle($appOptions->title);
 
