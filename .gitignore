@@ -10,8 +10,8 @@
 .*.swp
 
 # librarys & symlinks
-library/Zend
-library/Foo
+#library/Zend
+#library/Foo
 
 # logs
 logs/
