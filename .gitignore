@@ -1,0 +1,20 @@
+# phpstorm project directory
+.idea/
+
+# eclipse project files
+.buildpath
+.project
+.settings/
+
+# ignore vi swapfiles
+.*.swp
+
+# librarys & symlinks
+library/Zend
+library/Foo
+
+# logs
+logs/
+
+# zend specific files
+.zfproject.xml

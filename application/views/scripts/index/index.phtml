@@ -1,0 +1,100 @@
+<style type="text/css">
+/* <![CDATA[ */
+	* { margin:0; padding:0; }
+	.red { color:red; }
+	.green { color:green; }
+	.hide { display: none; }
+
+	#wrapper { position: relative; width:345px; margin:auto; padding:20px 0px; }
+
+	.titleBar { border: solid 1px #70dfff; background:#def5ff; width:337px; height:22px; padding:0px 4px; margin: 0 0 2px 0; }
+	.titleBar .title { font-weight:bold; font-size:12px; }
+	.toggleForm { cursor: pointer; float: right }
+	.addField { width:345px; height:175px; }
+
+	.ctrl { list-style-type:none; width:345px; }
+	.ctrl li { padding:5px 2px; float: right; }
+	.ctrl li button { cursor:pointer; }
+
+	.shoppingList { width:345px; clear:both; }
+	.shoppingList .delete { cursor:pointer; }
+/* ]]> */
+</style>
+<div id="wrapper">
+	<div class="titleBar">
+		<span class="title">
+			<?php echo $this->appOptions->title; ?>
+			<?php echo $this->appOptions->version; ?>
+		</span>
+		<div class="toggleForm is_toggleForm">[-]</div>
+	</div>
+	<div class="addForm is_addForm">
+		<textarea rows="1" cols="1" class="addField is_addField"></textarea>
+		<ul class="ctrl">
+			<li><button class="is_cancel red">clear</button></li>
+			<li><button class="is_submit green">save</button></li>
+		</ul>
+	</div>
+	<div class="shoppingList is_shoppingList">
+		<span class="item is_item_1" data-iid="1">Butter <span class="delete is_removeItem" data-iid="1">[x]</span></span>
+	</div>
+</div>
+<div class="hide is_maxItemId">1</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+	$(document).ready(function () {
+		function removeItem(itemId) {
+			$('.is_item'+itemId).remove();
+		}
+
+		$('.toggleForm').bind('click.hide', function () {
+			if ($('.is_addForm').hasClass('hide')) {
+				$('.is_addForm').removeClass('hide');
+			}
+			else {
+				$('.is_addForm').addClass('hide');
+			}
+		});
+
+		$('.is_cancel').bind('click.clear', function () {
+			$('.is_addField').val('');
+		});
+
+		$('.is_submit').bind('click.submit', function () {
+			$.ajax({
+				url: '/index/save/',
+				type: 'post',
+				data: {
+					newEntries: $('.is_addField').val()
+				},
+				dataType: 'json',
+				success: function (response) {
+					var values = $('.is_addField').val().split(', '),
+						newId = parseInt($('.is_maxItemId').html(), 10)+1;
+
+					if (! response.error) {
+						$(values).each(function () {
+							$itemDel = $('<span class="delete is_removeItem" data-iid="'+newId+'">[x]</span>');
+							$slItem = $('<span class="item is_item_'+newId+'"></span>');
+
+							$slItem.html(this)
+								   .append(' ')
+								   .append($itemDel);
+
+							$('.is_shoppingList').append(', ')
+												 .append($slItem);
+
+							$('.is_maxItemId').html(newId);
+						});
+					}
+				}
+			});
+		});
+
+		$('.is_removeItem').bind('click.remove', function () {
+			var iid = $(this).data('iid');
+			$('.is_item'+iid).remove();
+		});
+	});
+/* ]]> */
+</script>
