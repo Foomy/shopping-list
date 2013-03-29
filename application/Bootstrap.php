@@ -28,7 +28,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view->appOptions = $appOptions;
 
 		$view->skin = 'default';
-		$view->skin = 'mobile';
+		if (false !== strpos($_SERVER['HTTP_USER_AGENT'], 'Android')) {
+			$view->skin = 'mobile';
+		}
 
 		$view->doctype('HTML5');
 		$view->headTitle($appOptions->title);
