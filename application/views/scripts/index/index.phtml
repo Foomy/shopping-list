@@ -5,18 +5,18 @@
 	.green { color:green; }
 	.hide { display: none; }
 
-	#wrapper { position: relative; width:345px; padding:10px; }
+	#wrapper { position: relative; width:480px; padding:10px; }
 
-	.titleBar { border: solid 1px #70dfff; background:#def5ff; width:337px; height:22px; padding:0px 4px; margin: 0 0 2px 0; }
+	.titleBar { border: solid 1px #70dfff; background:#def5ff; width:473px; height:22px; padding:0px 4px; margin: 0 0 2px 0; }
 	.titleBar .title { font-weight:bold; font-size:12px; }
 	.toggleForm { cursor: pointer; float: right }
-	.addField { width:345px; height:175px; }
+	.addField { width:480px; height:175px; }
 
-	.ctrl { list-style-type:none; width:345px; }
+	.ctrl { list-style-type:none; width:480px; }
 	.ctrl li { padding:5px 2px; float: right; }
 	.ctrl li button { cursor:pointer; }
 
-	.shoppingList { width:345px; clear:both; }
+	.shoppingList { width:480px; clear:both; }
 	.shoppingList .delete { cursor:pointer; }
 /* ]]> */
 </style>
@@ -35,11 +35,9 @@
 			<li><button class="is_submit green">save</button></li>
 		</ul>
 	</div>
-	<div class="shoppingList is_shoppingList">
-		<span class="item is_item_1" data-iid="1">Butter <span class="delete is_removeItem" data-iid="1">[x]</span></span>
-	</div>
+	<div class="shoppingList is_shoppingList"></div>
 </div>
-<div class="hide is_maxItemId">1</div>
+<div class="hide is_maxItemId">0</div>
 <script type="text/javascript">
 /* <![CDATA[ */
 	$(document).ready(function () {
@@ -81,8 +79,10 @@
 								   .append(' ')
 								   .append($itemDel);
 
-							$('.is_shoppingList').append(', ')
-												 .append($slItem);
+							if ($('.is_shoppingList').html() != '') {
+								$('.is_shoppingList').append(', ');
+							}
+							$('.is_shoppingList').append($slItem);
 
 							$('.is_maxItemId').html(newId);
 						});
