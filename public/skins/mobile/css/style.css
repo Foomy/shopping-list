@@ -18,14 +18,14 @@
 }
 
 #wrapper {
-	/*width:480px;*/
+	width:480px;
 	padding: 10px;
 }
 
 .titleBar {
 	border: solid 1px #70dfff;
 	background: #def5ff;
-	/*width:473px;*/
+	width:473px;
 	height: 30px;
 	padding: 0px 4px;
 	margin: 0 0 2px 0;
@@ -61,7 +61,7 @@
 }
 
 .shoppingList {
-	/*width: 800px;*/
+	width: 480px;
 	clear: both;
 }
 
