@@ -20,7 +20,9 @@
 /* <![CDATA[ */
 	$(document).ready(function () {
 		function removeItem(itemId) {
-			$('.is_item'+itemId).remove();
+			console.log(itemId);
+			$('.is_item_'+itemId).remove();
+            $('.is_shoppingList').html($('.is_shoppingList').html().replace('/, /g', ''));
 		}
 
 		$('.toggleForm').bind('click.hide', function () {
@@ -45,11 +47,11 @@
 				},
 				dataType: 'json',
 				success: function (response) {
-					var values = $('.is_addField').val().split(', '),
-						newId = parseInt($('.is_maxItemId').html(), 10)+1;
+					var values = $('.is_addField').val().split(', ');
 
 					if (! response.error) {
 						$(values).each(function () {
+							var newId = parseInt($('.is_maxItemId').html(), 10)+1;
 							$itemDel = $('<span class="delete is_removeItem" data-iid="'+newId+'">[x]</span>');
 							$slItem = $('<span class="item is_item_'+newId+'"></span>');
 
@@ -65,14 +67,15 @@
 							$('.is_maxItemId').html(newId);
 						});
 					}
+
+					$('.is_removeItem').bind('click.del', function () {
+						var iid = $(this).data('iid');
+						removeItem(iid);
+					});
 				}
 			});
-		});
+		}); // $('.is_submit').bind()
 
-		$('.is_removeItem').bind('click.remove', function () {
-			var iid = $(this).data('iid');
-			$('.is_item'+iid).remove();
-		});
-	});
+	}); // $(document).ready()
 /* ]]> */
 </script>
