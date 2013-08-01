@@ -38,6 +38,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view->headMeta()->setCharset('utf-8');
 
 		$view->headScript()->appendFile('/js/jquery-1.9.1.min.js', 'text/javascript');
+		$view->headScript()->appendFile('/js/ShoppingList.js', 'text/javascript');
 
 
 		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');

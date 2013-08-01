@@ -9,73 +9,20 @@
 	<div class="addForm is_addForm">
 		<textarea rows="1" cols="1" class="addField is_addField"></textarea>
 		<ul class="ctrl">
-			<li><button class="is_cancel red">clear</button></li>
+			<li><button class="is_cancel red">cancel</button></li>
 			<li><button class="is_submit green">save</button></li>
 		</ul>
 	</div>
-	<div class="shoppingList is_shoppingList"></div>
+	<div class="shoppingList is_shoppingList">
+	<?php if (! empty($this->items)): ?>
+	<ul>
+		<?php foreach ($this->items as $idx => $item): ?>
+		<li class="item is_item_<?php echo $idx; ?>" >
+			<a href="" class="delete is_removeItem" data-iid="<php echo $idx; ?>"><?php echo $item; ?></a>
+		</li>
+		<?php endforeach; ?>
+	</ul>
+	<?php endif; ?>
+	</div>
 </div>
-<div class="hide is_maxItemId">0</div>
-<script type="text/javascript">
-/* <![CDATA[ */
-	$(document).ready(function () {
-		function removeItem(itemId) {
-			console.log(itemId);
-			$('.is_item_'+itemId).remove();
-            $('.is_shoppingList').html($('.is_shoppingList').html().replace('/, /g', ''));
-		}
-
-		$('.toggleForm').bind('click.hide', function () {
-			if ($('.is_addForm').hasClass('hide')) {
-				$('.is_addForm').removeClass('hide');
-			}
-			else {
-				$('.is_addForm').addClass('hide');
-			}
-		});
-
-		$('.is_cancel').bind('click.clear', function () {
-			$('.is_addField').val('');
-		});
-
-		$('.is_submit').bind('click.submit', function () {
-			$.ajax({
-				url: '/index/save/',
-				type: 'post',
-				data: {
-					newEntries: $('.is_addField').val()
-				},
-				dataType: 'json',
-				success: function (response) {
-					var values = $('.is_addField').val().split(', ');
-
-					if (! response.error) {
-						$(values).each(function () {
-							var newId = parseInt($('.is_maxItemId').html(), 10)+1;
-							$itemDel = $('<span class="delete is_removeItem" data-iid="'+newId+'">[x]</span>');
-							$slItem = $('<span class="item is_item_'+newId+'"></span>');
-
-							$slItem.html(this)
-								   .append(' ')
-								   .append($itemDel);
-
-							if ($('.is_shoppingList').html() != '') {
-								$('.is_shoppingList').append(', ');
-							}
-							$('.is_shoppingList').append($slItem);
-
-							$('.is_maxItemId').html(newId);
-						});
-					}
-
-					$('.is_removeItem').bind('click.del', function () {
-						var iid = $(this).data('iid');
-						removeItem(iid);
-					});
-				}
-			});
-		}); // $('.is_submit').bind()
-
-	}); // $(document).ready()
-/* ]]> */
-</script>
+<div class="hide is_maxItemId"><?php echo $this->itemCount; ?></div>
