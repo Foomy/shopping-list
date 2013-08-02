@@ -18,16 +18,15 @@
 }
 
 #wrapper {
-    border: solid 1px #008b8b;
-	width:460px;
-    height: 780px;
+	border: solid 1px #008b8b;
+	width:298px;
+	height: 438px;
 	padding: 10px;
 }
 
 .titleBar {
 	border: solid 1px #70dfff;
 	background: #def5ff;
-	width:473px;
 	height: 30px;
 	padding: 0px 4px;
 	margin: 0 0 2px 0;
@@ -44,29 +43,39 @@
 }
 
 .addField {
-	width: 480px;
-	height: 290px;
+	width: 99%;
+	height: 150px;
 }
 
 .ctrl {
 	list-style-type: none;
-	width: 480px;
 }
 
-.ctrl li {
-	padding: 5px 2px;
-	float: right;
-}
+	.ctrl li {
+		padding: 5px 2px;
+		float: right;
+	}
 
-.ctrl li button {
-	cursor: pointer;
-}
+		.ctrl li button {
+			cursor: pointer;
+		}
 
 .shoppingList {
-	width: 480px;
 	clear: both;
 }
 
-.shoppingList .delete {
-	cursor: pointer;
-}
+	.shoppingList ul {
+		list-style-type: none;
+	}
+
+		.shoppingList ul li {
+			border: solid 1px #008b8b;
+			margin: 0 5px 5px 0;
+			float: left;
+		}
+
+			.shoppingList ul li a {
+				display: block;
+				padding: 3px;
+				text-decoration: none;
+			}

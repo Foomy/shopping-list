@@ -26,9 +26,10 @@ var ShoppingList = {
 	},
 
 	initDeleteButtons: function () {
-		$('.is_removeItem').bind('click.del', function () {
+		$('.is_removeItem').unbind('click').bind('click.del', function () {
 			var iid = $(this).data('iid');
 			ShoppingList.removeItem(iid);
+			return false;
 		});
 	},
 
@@ -46,17 +47,13 @@ var ShoppingList = {
 				if (! response.error) {
 					$(values).each(function () {
 						var newId = parseInt($('.is_maxItemId').html(), 10)+1;
-						$itemDel = $('<span class="delete is_removeItem" data-iid="'+newId+'">[x]</span>');
-						$slItem = $('<span class="item is_item_'+newId+'"></span>');
+						$itemDel = $('<a class="delete is_removeItem" data-iid="'+newId+'" href=""></a>');
+						$slItem = $('<li class="item is_item_'+newId+'"></li>');
 
-						$slItem.html(this)
-							.append(' ')
-							.append($itemDel);
+						$itemDel.html(this);
+						$slItem.html($itemDel);
 
-						if ($('.is_shoppingList').html() != '') {
-							$('.is_shoppingList').append(', ');
-						}
-						$('.is_shoppingList').append($slItem);
+						$('.is_shoppingList ul').append($slItem);
 
 						$('.is_maxItemId').html(newId);
 						$('.is_addField').val('');
@@ -68,10 +65,24 @@ var ShoppingList = {
 	},
 
 	removeItem: function (itemId) {
-		console.log(itemId);
-		$('.is_item_'+itemId).remove();
-		$('.is_shoppingList').html($('.is_shoppingList').html().replace('/, /g', ''));
+		$.ajax({
+				type: 'post',
+				url: '/index/delete/',
+				data: {
+					itemId: itemId
+				},
+				dataType: 'json',
+				success: function (response) {
+					if (! response.error) {
+						$('.is_item_'+itemId).remove();
+					}
+					else {
+						alert(response.message);
+					}
+				}
+			});
 	},
+
 
 	toggleForm: function () {
 		if ($('.is_addForm').hasClass('hide')) {

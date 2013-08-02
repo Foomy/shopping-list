@@ -41,14 +41,27 @@ class IndexController extends Zend_Controller_Action
 		));
 	}
 
-	/**
-	 * Checks, if the request is a ajax request.
-	 *
-	 * @return	bool
-	 */
-	protected function isAjax()
+	public function deleteAction()
 	{
-		return $this->getRequest()->isXmlHttpRequest();
+		if (! $this->isAjax()) {
+			$this->redirect('/');
+		}
+
+		$itemId = (int)$this->_getParam('itemId', -1);
+		if ($itemId < 0) {
+			$this->_helper->json(array(
+				'error' => true,
+				'message' => 'Ungültige Item ID.'
+			));
+		}
+
+		$this->model()->removeItem($itemId);
+		$this->model()->write();
+
+		$this->_helper->json(array(
+			'error' => false,
+			'message' => 'Artikel gelöscht.'
+		));
 	}
 
 	/**
@@ -68,6 +81,16 @@ class IndexController extends Zend_Controller_Action
 		}
 
 		return $this->model;
+	}
+
+	/**
+	 * Checks, if the request is a ajax request.
+	 *
+	 * @return	bool
+	 */
+	private function isAjax()
+	{
+		return $this->getRequest()->isXmlHttpRequest();
 	}
 }
 

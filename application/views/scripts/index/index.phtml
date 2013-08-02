@@ -1,28 +1,26 @@
-<div id="wrapper">
-	<div class="titleBar">
-		<span class="title">
-			<?php echo $this->appOptions->title; ?>
-			<?php echo $this->appOptions->version; ?>
-		</span>
-		<div class="toggleForm is_toggleForm">[-]</div>
-	</div>
-	<div class="addForm is_addForm">
-		<textarea rows="1" cols="1" class="addField is_addField"></textarea>
-		<ul class="ctrl">
-			<li><button class="is_cancel red">cancel</button></li>
-			<li><button class="is_submit green">save</button></li>
-		</ul>
-	</div>
-	<div class="shoppingList is_shoppingList">
+<div class="titleBar">
+	<span class="title">
+		<?php echo $this->appOptions->title; ?>
+		<?php echo $this->appOptions->version; ?>
+	</span>
+	<div class="toggleForm is_toggleForm">[-]</div>
+</div>
+<div class="addForm is_addForm<?php echo ('mobile' === $this->skin) ? ' hide' : ''; ?>">
+	<textarea rows="1" cols="1" class="addField is_addField"></textarea>
+	<ul class="ctrl">
+		<li><button class="is_cancel red">cancel</button></li>
+		<li><button class="is_submit green">save</button></li>
+	</ul>
+</div>
+<div class="shoppingList is_shoppingList">
 	<?php if (! empty($this->items)): ?>
 	<ul>
 		<?php foreach ($this->items as $idx => $item): ?>
 		<li class="item is_item_<?php echo $idx; ?>" >
-			<a href="" class="delete is_removeItem" data-iid="<php echo $idx; ?>"><?php echo $item; ?></a>
+			<a href="" class="delete is_removeItem" data-iid="<?php echo $idx; ?>"><?php echo $item; ?></a>
 		</li>
 		<?php endforeach; ?>
 	</ul>
 	<?php endif; ?>
-	</div>
 </div>
 <div class="hide is_maxItemId"><?php echo $this->itemCount; ?></div>
