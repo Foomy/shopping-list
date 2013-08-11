@@ -53,6 +53,10 @@ body {
 	height: 175px;
 }
 
+.download {
+	float:left;
+}
+
 .ctrl {
 	list-style-type: none;
 	width: 480px;
